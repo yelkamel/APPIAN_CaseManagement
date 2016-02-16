@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:com:appian:types"
+  xmlns:tns="urn:com:appian:types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="SCY_patient">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[captures basic demographics ]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="patientid" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Id @GeneratedValue</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="first_name" nillable="true" type="xsd:string"/>
+      <xsd:element name="last_name" nillable="true" type="xsd:string"/>
+      <xsd:element name="email" nillable="true" type="xsd:string"/>
+      <xsd:element name="address" nillable="true" type="xsd:string"/>
+      <xsd:element name="phone" nillable="true" type="xsd:string"/>
+      <xsd:element name="date_of_birth" nillable="true" type="xsd:date"/>
+      <xsd:element name="NHS_num" nillable="true" type="xsd:int"/>
+      <xsd:element name="date_created" nillable="true" type="xsd:date"/>
+      <xsd:element name="created_by" nillable="true" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

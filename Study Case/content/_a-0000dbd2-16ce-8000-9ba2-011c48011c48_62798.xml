@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>SCY_testALLdata</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62798</uuid>
+        <description></description>
+        <folderUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62661</folderUuid>
+        <dataStoreEntityCompositeUuid>83faf170-74e9-4e1c-974e-85c67a9b1ff3@_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625</dataStoreEntityCompositeUuid>
+        <params/>
+        <filters/>
+        <orderings/>
+    </queryRule>
+    <roleMap public="false">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

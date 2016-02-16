@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tempoReportHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <tempoReport name="SCY Outcome VS Time" a:uuid="e1e8c06c-3feb-420e-bbad-b9492b40ff26">
+        <a:description>To see the Outcomes by case manager versus time spent on a case </a:description>
+        <a:uiExpr>=#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64704&quot;()</a:uiExpr>
+        <a:urlStub>e27-RQ</a:urlStub>
+    </tempoReport>
+    <roleMap/>
+</tempoReportHaul>

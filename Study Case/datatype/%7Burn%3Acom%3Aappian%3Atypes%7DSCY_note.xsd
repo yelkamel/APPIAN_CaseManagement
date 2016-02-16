@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:com:appian:types"
+  xmlns:tns="urn:com:appian:types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="SCY_note">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[captures activities against the case]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="noteid" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Id @GeneratedValue</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="title_note" nillable="true" type="xsd:string"/>
+      <xsd:element name="description" nillable="true" type="xsd:string"/>
+      <xsd:element name="caseid" nillable="true" type="xsd:int"/>
+      <xsd:element name="userid" nillable="true" type="xsd:int"/>
+      <xsd:element name="date_created" nillable="true" type="xsd:date"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

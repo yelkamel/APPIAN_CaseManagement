@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_OutcomesOfCases</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64447</uuid>
+        <description>Outcomes by cases report</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62809</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex: 1,
+    batchSize: -1,
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field: &quot;outcome&quot;,
+      ascending: true
+    )
+  ),
+  with(
+    local!datasubset: #&quot;SYSTEM_SYSRULES_queryEntity&quot;(
+      entity: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63888&quot;,
+      query: #&quot;SYSTEM_SYSRULES_query&quot;(
+        aggregation: #&quot;SYSTEM_SYSRULES_queryAggregation&quot;(aggregationColumns: {
+          #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(field: &quot;outcome&quot;, isGrouping: true),
+          #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(field: &quot;caseid&quot;, aggregationFunction: &quot;COUNT&quot;),
+        }),
+      filter: #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+        field: &quot;outcome&quot;,
+        operator: &quot;&lt;&gt;&quot;,
+        value: &quot; &quot;
+      ),
+      pagingInfo: local!pagingInfo
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_pieChartField&quot;(
+      label: &quot;Outcomes By Case&quot;,
+      series: {
+        apply(
+          #&quot;SYSTEM_SYSRULES_chartSeries&quot;(label: _, data: _),
+          merge(
+            index(local!datasubset.data, &quot;outcome&quot;, null),
+            index(local!datasubset.data, &quot;caseid&quot;, null)
+          )
+        )
+      },
+      showTooltips: true
+    )
+  )
+)
+</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

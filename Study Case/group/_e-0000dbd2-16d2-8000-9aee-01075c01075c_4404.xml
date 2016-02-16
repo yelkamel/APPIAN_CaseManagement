@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<groupHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <group>
+        <name>SCY_admin</name>
+        <securityMap>SECURITYMAP_TEAM</securityMap>
+        <uuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</uuid>
+        <groupTypeUuid>SYSTEM_GROUP_TYPE_CUSTOM</groupTypeUuid>
+        <description>admin of the study case</description>
+        <delegatedCreation>false</delegatedCreation>
+        <memberPolicy>MEMBERPOLICY_CLOSED</memberPolicy>
+        <viewingPolicy>VIEWINGPOLICY_LOW</viewingPolicy>
+        <attributes/>
+    </group>
+    <members>
+        <users>
+            <userUuid>pujohehogy</userUuid>
+            <userUuid>youcef.el.kamal@pshealth.co.uk</userUuid>
+            <userUuid>dodil</userUuid>
+        </users>
+        <groups/>
+    </members>
+    <admins>
+        <users>
+            <userUuid>youcef.el.kamal@pshealth.co.uk</userUuid>
+        </users>
+        <groups/>
+    </admins>
+    <ruleSet/>
+</groupHaul>

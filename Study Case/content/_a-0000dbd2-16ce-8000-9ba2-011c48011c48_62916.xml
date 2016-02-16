@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_case_interface</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62916</uuid>
+        <description></description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Case&quot;,
+  instructions: &quot;Case information&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_dateField&quot;(
+      label: &quot;Date created&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      value: ri!date_created,
+      saveInto: ri!date_created,
+      required: true,
+      validations: {}
+    ),/*
+    a!pickerFieldUsers(
+      label: &quot;Manager&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      maxselections: 1,
+      groupfilter: cons!SCY_user_team,
+      value: ri!manager_name,
+      saveInto: ri!manager_name,
+      required: true,
+      requiredmessage: &quot;You must enter who is in charge of the case ?&quot;,
+      validations: {}
+    ),*/
+    #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+      label: &quot;Patient&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      placeholderLabel: &quot;--- Select a Patient ---&quot;,
+      choiceLabels: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63058&quot;(),
+      choiceValues: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63059&quot;(),
+      value: ri!patientid,
+      saveInto: ri!patientid,
+      required: true,
+      requiredmessage: &quot;This case is created for which patient ?&quot;,
+      validations: {}
+    )
+/*      label: &quot;outcome&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      placeholderLabel: &quot;--- Select a outcome ---&quot;,
+      choiceLabels: cons!SCY_case_outcomes,
+      choiceValues: cons!SCY_case_outcomes,
+      value: ri!outcome,
+      saveInto: ri!outcome,
+      disabled: true,
+      validations: {}
+    ),
+    a!dateField(
+      label: &quot;Date closed&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      value: ri!date_closed,
+      saveInto: ri!date_closed,
+      disabled: true,
+      validations: {}
+    )*/,
+    #&quot;SYSTEM_SYSRULES_integerField&quot;(
+      label: &quot;Number of days estimation&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      saveInto: ri!estimation,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      validations: {}
+    )
+  },
+  secondColumnContents: {
+  #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;&quot;,
+      labelPosition: &quot;COLLAPSED&quot;,
+      value: &quot;&quot;,
+      readonly: true
+    )  },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;,
+        saveInto: {}
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>date_created</name>
+            <type>
+                <name>date</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>patientid</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>estimation</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="a:Expression"/>
+                <a:nameRef>cancel</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:date"/>
+                <a:nameRef>date_created</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                <a:nameRef>patientid</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                <a:nameRef>estimation</a:nameRef>
+            </a:ruleInputTestConfigs>
+        </value>
+    </typedValue>
+</contentHaul>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recordTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <recordType name="SCY_sla_dash" a:uuid="ca755ce2-30b2-4cb5-ac96-100553959441">
+        <a:pluralName>SCY SLA</a:pluralName>
+        <a:description>For see all the SLA</a:description>
+        <a:urlStub>ZI9-Dw</a:urlStub>
+        <a:source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:DataStoreEntity" a:uuid="36e609a9-4c63-4322-a3b9-e1cdd58787c5@_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625"/>
+        <a:listViewTemplateExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63907&quot;()</a:listViewTemplateExpr>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;Summary&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63917&quot;()</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>summary</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+        </a:detailViewCfg>
+        <a:defaultSortInfo>
+            <field>slaid</field>
+            <ascending>true</ascending>
+        </a:defaultSortInfo>
+        <a:isSystem>false</a:isSystem>
+        <a:dataSrcExpr></a:dataSrcExpr>
+        <a:facetsListExpr></a:facetsListExpr>
+        <a:defaultFiltersExpr></a:defaultFiltersExpr>
+        <a:security>16383</a:security>
+    </recordType>
+    <roleMap>
+        <role name="record_type_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4403</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_editor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4405</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_auditor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</recordTypeHaul>

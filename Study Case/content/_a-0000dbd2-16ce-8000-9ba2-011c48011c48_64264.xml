@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>SCY_getsla</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64264</uuid>
+        <description>Rule for take the SLA with name and caseid</description>
+        <folderUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62809</folderUuid>
+        <dataStoreEntityCompositeUuid>36e609a9-4c63-4322-a3b9-e1cdd58787c5@_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625</dataStoreEntityCompositeUuid>
+        <params>
+            <param>
+                <description></description>
+                <name>caseid</name>
+                <type>{http://www.w3.org/2001/XMLSchema}int</type>
+            </param>
+            <param>
+                <description></description>
+                <name>name</name>
+                <type>{http://www.w3.org/2001/XMLSchema}string</type>
+            </param>
+        </params>
+        <filters>
+            <filter>
+                <field>
+                    <name>caseid</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}int</type>
+                </field>
+                <op>=</op>
+                <value>caseid</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+            <filter>
+                <field>
+                    <name>name_sla</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}string</type>
+                </field>
+                <op>=</op>
+                <value>name</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+        </filters>
+        <orderings/>
+    </queryRule>
+    <roleMap public="false">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

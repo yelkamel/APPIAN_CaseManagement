@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_logtime_interface</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63757</uuid>
+        <description>For logging time against a case</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Log Time for the case number &quot;&amp; pv!caseid,
+  instructions: &quot;Enter logtime&quot;,
+firstColumnContents: {
+
+
+    #&quot;SYSTEM_SYSRULES_integerField&quot;(
+      label: &quot;Duration&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      instructions: &quot;Enter number of hours&quot;,
+      value: ri!duration,
+      saveInto: ri!duration,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      required: true,
+      requiredmessage: &quot;How much time he work on the case ?&quot;,
+      validations: {}
+    )
+  },
+  secondColumnContents: {
+  #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;&quot;,
+      labelPosition: &quot;COLLAPSED&quot;,
+      value: &quot;&quot;,
+      readonly: true
+    )  
+  },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;,
+        saveInto: {}
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>duration</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>username</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="a:Expression"/>
+                <a:nameRef>cancel</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                <a:nameRef>duration</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>username</a:nameRef>
+            </a:ruleInputTestConfigs>
+        </value>
+    </typedValue>
+</contentHaul>

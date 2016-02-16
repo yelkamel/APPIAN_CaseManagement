@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recordTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <recordType name="SCY_case_dash" a:uuid="459c4d41-4d7c-44d9-b333-69679cec56c5">
+        <a:pluralName>SCY Case </a:pluralName>
+        <a:description>Basic details of a case</a:description>
+        <a:urlStub>bxJj0A</a:urlStub>
+        <a:source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:DataStoreEntity" a:uuid="3153a228-6267-446a-93a5-f546d12a3de6@_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625"/>
+        <a:listViewTemplateExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62910&quot;()</a:listViewTemplateExpr>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;Summary&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62912&quot;()</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>summary</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>a165507c-36a2-444a-a422-cfb4bf52d4d3</a:relatedActionCfg>
+            <a:relatedActionCfg>dfb78c0d-691a-4258-94c1-f7ac35f80c04</a:relatedActionCfg>
+            <a:relatedActionCfg>6c7861a4-add8-49b1-8bc1-130d2ad1f431</a:relatedActionCfg>
+            <a:relatedActionCfg>7cbbd3a7-47ec-44a3-96c9-ee6bd4f9f91e</a:relatedActionCfg>
+            <a:relatedActionCfg>58bb39a8-4ba1-48a4-b05c-8d2a25e53221</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;All logtime of the case&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64089&quot;(rp!id)
+</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>_Dbml1Q</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>6c7861a4-add8-49b1-8bc1-130d2ad1f431</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;All note of this case&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64689&quot;()</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>_OA8L4g</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>dfb78c0d-691a-4258-94c1-f7ac35f80c04</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:defaultSortInfo>
+            <field>caseid</field>
+            <ascending>true</ascending>
+        </a:defaultSortInfo>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dc79-6321-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{caseid:rp!id}</a:contextExpr>
+            <a:visibilityExpr>=if (isnull(rf!date_closed) , if(isnull(rf!case_manager),true,false), false)</a:visibilityExpr>
+            <a:refId>a165507c-36a2-444a-a422-cfb4bf52d4d3</a:refId>
+        </a:relatedActionCfg>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dc6e-df68-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{caseid:rp!id}</a:contextExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:refId>dfb78c0d-691a-4258-94c1-f7ac35f80c04</a:refId>
+        </a:relatedActionCfg>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dc78-3572-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{caseid:rf!caseid}</a:contextExpr>
+            <a:visibilityExpr>=if(isnull(rf!case_manager),false,isnull(rf!date_closed))</a:visibilityExpr>
+            <a:refId>6c7861a4-add8-49b1-8bc1-130d2ad1f431</a:refId>
+        </a:relatedActionCfg>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dc70-38d6-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{caseid:rp!id}</a:contextExpr>
+            <a:visibilityExpr>=if(isnull(rf!case_manager),false,isnull(rf!date_closed))</a:visibilityExpr>
+            <a:refId>7cbbd3a7-47ec-44a3-96c9-ee6bd4f9f91e</a:refId>
+        </a:relatedActionCfg>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dc77-e8dc-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{caseid:rp!id}</a:contextExpr>
+            <a:visibilityExpr>=false()</a:visibilityExpr>
+            <a:refId>58bb39a8-4ba1-48a4-b05c-8d2a25e53221</a:refId>
+        </a:relatedActionCfg>
+        <a:isSystem>false</a:isSystem>
+        <a:dataSrcExpr></a:dataSrcExpr>
+        <a:facetsListExpr></a:facetsListExpr>
+        <a:defaultFiltersExpr></a:defaultFiltersExpr>
+        <a:security>16383</a:security>
+    </recordType>
+    <roleMap>
+        <role name="record_type_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4403</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_editor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4405</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_auditor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</recordTypeHaul>

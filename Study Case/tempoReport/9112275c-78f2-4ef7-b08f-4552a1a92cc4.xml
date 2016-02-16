@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tempoReportHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <tempoReport name="SCY Manager Logged by Case" a:uuid="9112275c-78f2-4ef7-b08f-4552a1a92cc4">
+        <a:description>To see how much time an user work on a case</a:description>
+        <a:uiExpr>=#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64462&quot;()</a:uiExpr>
+        <a:urlStub>E1J4tw</a:urlStub>
+    </tempoReport>
+    <roleMap>
+        <role name="report_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+        <role name="report_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4403</groupUuid>
+            </groups>
+        </role>
+        <role name="report_auditor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+        <role name="report_editor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4405</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</tempoReportHaul>

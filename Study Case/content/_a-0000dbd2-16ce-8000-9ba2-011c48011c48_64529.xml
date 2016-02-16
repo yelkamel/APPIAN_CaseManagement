@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_SLAByManager</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64529</uuid>
+        <description>Filter SLA report by case manager</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(&#xD;
+  local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex: 1, batchSize: length(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64323&quot;(&quot;slaid&quot;)), sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(field: &quot;slaid&quot;, ascending: true)),&#xD;
+  local!selectedCaseManager,&#xD;
+  with(&#xD;
+    local!datasubset: queryrecord(&#xD;
+      #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64318&quot;,&#xD;
+      #&quot;SYSTEM_SYSRULES_query&quot;(&#xD;
+        selection: #&quot;SYSTEM_SYSRULES_querySelection&quot;(&#xD;
+          columns: {&#xD;
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;slaid&quot;),&#xD;
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;caseid&quot;),&#xD;
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;name_sla&quot;),&#xD;
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;date_completed&quot;),&#xD;
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;deadline&quot;),&#xD;
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;userid&quot;)&#xD;
+          }),&#xD;
+	    filter: if(&#xD;
+          isnull(&#xD;
+            local!selectedCaseManager&#xD;
+          ),&#xD;
+          null,&#xD;
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(&#xD;
+            field: &quot;userid&quot;,&#xD;
+            operator: &quot;=&quot;,&#xD;
+            value: local!selectedCaseManager&#xD;
+          )&#xD;
+        ),&#xD;
+          pagingInfo:local!pagingInfo&#xD;
+      )&#xD;
+    ),&#xD;
+    local!filteredData: if(&#xD;
+      isnull(local!selectedCaseManager),&#xD;
+      local!datasubset.data,&#xD;
+      index(local!datasubset.data, where(search(local!selectedCaseManager, local!datasubset.data.userid)), {})&#xD;
+    ),&#xD;
+    local!filteredDatasubset: todatasubset(local!filteredData, local!pagingInfo),&#xD;
+  #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(&#xD;
+    firstColumnContents: {&#xD;
+      #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+        label: &quot;SLA Report&quot;,&#xD;
+        firstColumnContents: {&#xD;
+          #&quot;SYSTEM_SYSRULES_dropdownField&quot;(&#xD;
+            label: &quot;Case Manager&quot;,&#xD;
+            labelPosition: &quot;ABOVE&quot;,&#xD;
+            placeholderLabel: &quot;--- Select a Case Manager ---&quot;,&#xD;
+            choiceLabels: apply(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64523&quot;,#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64585&quot;().data.case_manager),&#xD;
+            choiceValues: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64585&quot;().data.case_manager,&#xD;
+            value: local!selectedCaseManager, &#xD;
+            saveInto: {local!selectedCaseManager,&#xD;
+            a!save(local!pagingInfo.startIndex, 1)&#xD;
+            },&#xD;
+            validations: {}&#xD;
+          ),&#xD;
+          #&quot;SYSTEM_SYSRULES_gridField&quot;(&#xD;
+            label: &quot; &quot;,&#xD;
+            labelPosition: &quot;ABOVE&quot;,&#xD;
+            totalCount: local!datasubset.totalCount,&#xD;
+            columns: {&#xD;
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                label: &quot;Case ID&quot;,&#xD;
+                field: &quot;caseid&quot;,&#xD;
+                data: index(local!filteredDatasubset.data, &quot;caseid&quot;, null),&#xD;
+                links: apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(label: {},recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63661&quot;,identifier: _, dashboard: &quot;summary&quot;),&#xD;
+                index(local!filteredDatasubset.data, &quot;caseid&quot;, {})&#xD;
+                )&#xD;
+              ),&#xD;
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                label: &quot;SLA ID&quot;,&#xD;
+                field: &quot;slaid&quot;,&#xD;
+                data: index(local!filteredDatasubset.data, &quot;slaid&quot;, null),&#xD;
+                links: apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(label: {},recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63742&quot;,identifier: _, dashboard: &quot;summary&quot;),&#xD;
+                index(local!filteredDatasubset, &quot;slaid&quot;, {})&#xD;
+                )&#xD;
+              ),&#xD;
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                label: &quot;SLA Name&quot;,&#xD;
+                field: &quot;name_sla&quot;,&#xD;
+                data: index(local!filteredDatasubset.data, &quot;name_sla&quot;, null)&#xD;
+              ),&#xD;
+             #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                  label: &quot;Date Completed&quot;,&#xD;
+                  field: &quot;date_completed&quot;,&#xD;
+                  data: fn!datetext(&#xD;
+                    ToDate(&#xD;
+                      index(&#xD;
+                        local!datasubset.data,&#xD;
+                        &quot;date_completed&quot;,&#xD;
+                        null&#xD;
+                      )&#xD;
+                    ),&#xD;
+                    &quot;dd/MM/yyyy&quot;&#xD;
+                  )&#xD;
+                ),&#xD;
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                  label: &quot;Deadline&quot;,&#xD;
+                  field: &quot;deadline&quot;,&#xD;
+                  data: fn!datetext(&#xD;
+                    ToDate(&#xD;
+                      index(&#xD;
+                        local!datasubset.data,&#xD;
+                        &quot;deadline&quot;,&#xD;
+                        null&#xD;
+                      )&#xD;
+                    ),&#xD;
+                    &quot;dd/MM/yyyy&quot;&#xD;
+                  )&#xD;
+                ),&#xD;
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(&#xD;
+                label: &quot;User&quot;,&#xD;
+                field: &quot;userid&quot;,&#xD;
+                data: apply(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64523&quot;,index(local!filteredDatasubset.data, &quot;userid&quot;, {})),&#xD;
+                links: apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(label: {},recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63669&quot;,identifier: _, dashboard: &quot;summary&quot;),&#xD;
+                index(local!filteredDatasubset.data, &quot;userid&quot;, {})&#xD;
+                )&#xD;
+              )&#xD;
+            },&#xD;
+            value: local!pagingInfo&#xD;
+          )&#xD;
+        },&#xD;
+        secondColumnContents: {}&#xD;
+      )&#xD;
+    }&#xD;
+  )&#xD;
+  )&#xD;
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

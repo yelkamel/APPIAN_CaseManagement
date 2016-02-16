@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_user_interface</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62964</uuid>
+        <description>Create new user for SCY</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;User&quot;,
+  instructions: &quot;User information&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;First name&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!first_name,
+      saveInto: ri!first_name,
+      required: true,
+      validations: {}
+    ),
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Last name&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!last_name,
+      saveInto: ri!last_name,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      required: true,
+      validations: {}
+    ),
+            #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Username&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!username,
+      saveInto: ri!username,
+              required: true,
+      validations: {}
+    ),
+
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Email&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!email,
+      saveInto: ri!email,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      required: true,
+      validations: {}
+    )
+    ,
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Phone&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!phone,
+      saveInto: ri!phone,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      validations: {}
+    )
+,
+    #&quot;SYSTEM_SYSRULES_dateField&quot;(
+      label: &quot;Date of birth&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!date_of_birth,
+      saveInto: ri!date_of_birth,
+        validations: {}
+    )
+,
+    
+        #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+      label: &quot;Team&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+
+      placeholderLabel: &quot;--- Select a Team ---&quot;,
+      choiceLabels: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62982&quot;,
+      choiceValues: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62982&quot;,
+      value: ri!team,
+      saveInto: ri!team,
+          required: true,
+      validations: {}
+    )
+
+    },
+  secondColumnContents: {
+  #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;&quot;,
+      labelPosition: &quot;COLLAPSED&quot;,
+      value: &quot;&quot;,
+      readonly: true
+    )   },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;,
+        saveInto: {}
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>first_name</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>last_name</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>email</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>phone</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>date_of_birth</name>
+            <type>
+                <name>date</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>team</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>username</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="a:Expression"/>
+                <a:nameRef>cancel</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>first_name</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>last_name</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>email</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>phone</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:date"/>
+                <a:nameRef>date_of_birth</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>team</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>username</a:nameRef>
+            </a:ruleInputTestConfigs>
+        </value>
+    </typedValue>
+</contentHaul>

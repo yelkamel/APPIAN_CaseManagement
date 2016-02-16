@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>SCY_GetCaseById</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63098</uuid>
+        <description></description>
+        <folderUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62809</folderUuid>
+        <dataStoreEntityCompositeUuid>3153a228-6267-446a-93a5-f546d12a3de6@_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625</dataStoreEntityCompositeUuid>
+        <params>
+            <param>
+                <description></description>
+                <name>currentcase</name>
+                <type>{http://www.w3.org/2001/XMLSchema}int</type>
+            </param>
+        </params>
+        <filters>
+            <filter>
+                <field>
+                    <name>caseid</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}int</type>
+                </field>
+                <op>=</op>
+                <value>currentcase</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+        </filters>
+        <orderings/>
+    </queryRule>
+    <roleMap public="false">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

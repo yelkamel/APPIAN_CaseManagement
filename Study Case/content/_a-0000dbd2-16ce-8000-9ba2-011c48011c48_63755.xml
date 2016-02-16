@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_NewLogTime_interface</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63755</uuid>
+        <description>For logging time against a case</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Log Time Form&quot;,
+  instructions: &quot;Enter logtime data&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_integerField&quot;(
+      label: &quot;Case ID&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: ri!caseId,
+      saveInto: ri!caseId,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      readonly: true,
+      validations: {}
+    ),
+    #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+      label: &quot;Case Manager&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      placeholderLabel: &quot;--- Select a User ---&quot;,
+      choiceLabels: if(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63027&quot;() = {}, {}, #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63027&quot;().UserName),
+      choiceValues: if(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63007&quot;() = {}, {}, #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63007&quot;().UserId),
+      value: ri!userId,
+      saveInto: ri!userId,
+      required: true,
+      validations: {}
+    ),
+    #&quot;SYSTEM_SYSRULES_integerField&quot;(
+      label: &quot;Duration&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      instructions: &quot;Enter number of hours&quot;,
+      value: ri!duration,
+      saveInto: ri!duration,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      required: true,
+      validations: {}
+    )
+  },
+  secondColumnContents: {
+    /* Add components here for a two-column form */
+  },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;,
+        saveInto: {}
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>caseId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>userId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>duration</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

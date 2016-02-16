@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_OverTimebyManager</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64748</uuid>
+        <description>Overtime by case manager for a date period (advanced)</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62809</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= load(
+  local!date2: now(),
+  local!date1: datetime(
+    1901,
+    1,
+    1
+  ),
+  local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex: 1,
+    batchSize: length(
+      #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64323&quot;(
+        &quot;slaid&quot;
+      )
+    ),
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field: &quot;slaid&quot;,
+      ascending: true
+    )
+  ),
+  with(
+    local!datasubset: queryrecord(
+      #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64318&quot;,
+      #&quot;SYSTEM_SYSRULES_query&quot;(
+        selection: #&quot;SYSTEM_SYSRULES_querySelection&quot;(
+          columns: {
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;slaid&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;caseid&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;name_sla&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;date_completed&quot;,
+              alias: &quot;date_completed&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;deadline&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;userid&quot;
+            )
+          }
+        ),
+        logicalExpression: #&quot;SYSTEM_SYSRULES_queryLogicalExpression&quot;(
+          operator: &quot;AND&quot;,
+          filters: {
+            #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+              field: &quot;date_completed&quot;,
+              operator: &quot;not null&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+              field: &quot;date_completed&quot;,
+              operator: &quot;between&quot;,
+              value: {
+                if(
+                  isnull(
+                    local!date1
+                  ),
+                  datetime(
+                    1901,
+                    1,
+                    1
+                  ),
+                  fn!Todatetime(
+                    local!date1
+                  )
+                ),
+                if(
+                  isnull(
+                    local!date2
+                  ),
+                  now(),
+                  fn!ToDateTime(
+                    local!date2
+                  )
+                )
+              }
+            ),
+            #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+              field: &quot;deadline&quot;,
+              operator: &quot;&lt;&quot;,
+              value: local!date2
+             /* value: date_completed */
+            )
+          }
+        ),
+        pagingInfo: local!pagingInfo
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+          label: &quot;OverTime by Manager&quot;,
+          firstColumnContents: {
+            #&quot;SYSTEM_SYSRULES_dateField&quot;(
+              label: &quot;From&quot;,
+              labelPosition: &quot;ABOVE&quot;,
+              value: local!date1,
+              saveInto: local!date1,
+              validations: {}
+            ),
+            #&quot;SYSTEM_SYSRULES_dateField&quot;(
+              label: &quot;To&quot;,
+              labelPosition: &quot;ABOVE&quot;,
+              value: local!date2,
+              saveInto: local!date2,
+              validations: {}
+            ),
+            #&quot;SYSTEM_SYSRULES_gridField&quot;(
+              label: &quot; &quot;,
+              labelPosition: &quot;ABOVE&quot;,
+              totalCount: local!datasubset.totalcount + 1,
+              columns: {
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Case&quot;,
+                  field: &quot;caseid&quot;,
+                  data: index(
+                    local!datasubset.data,
+                    &quot;caseid&quot;,
+                    null
+                  ),
+                  links: if(
+                    isnull(
+                      index(
+                        local!datasubset.data,
+                        &quot;caseid&quot;,
+                        null
+                      )
+                    ),
+                    {},
+                    apply(
+                      #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+                        label: {},
+                        recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63661&quot;,
+                        identifier: _,
+                        dashboard: &quot;summary&quot;
+                      ),
+                      index(
+                        local!datasubset.data,
+                        &quot;caseid&quot;,
+                        null
+                      )
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;SLA&quot;,
+                  field: &quot;slaid&quot;,
+                  data: index(
+                    local!datasubset.data,
+                    &quot;slaid&quot;,
+                    null
+                  ),
+                  links: if(
+                    isnull(
+                      index(
+                        local!datasubset.data,
+                        &quot;slaid&quot;,
+                        null
+                      )
+                    ),
+                    {},
+                    apply(
+                      #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+                        label: {},
+                        recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64318&quot;,
+                        identifier: _,
+                        dashboard: &quot;summary&quot;
+                      ),
+                      index(
+                        local!datasubset.data,
+                        &quot;slaid&quot;,
+                        null
+                      )
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;User&quot;,
+                  field: &quot;userid&quot;,
+                  data: if(
+                    Isnull(
+                      index(
+                        local!datasubset.data,
+                        &quot;userid&quot;,
+                        null
+                      )
+                    ),
+                    {},
+                    apply(
+                      #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64523&quot;,
+                      index(
+                        local!datasubset.data,
+                        &quot;userid&quot;,
+                        null
+                      )
+                    )
+                  ),
+                  links: if(
+                    Isnull(
+                      index(
+                        local!datasubset.data,
+                        &quot;userid&quot;,
+                        null
+                      )
+                    ),
+                    {},
+                    apply(
+                      #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+                        label: {},
+                        recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63669&quot;,
+                        identifier: _,
+                        dashboard: &quot;summary&quot;
+                      ),
+                      index(
+                        local!datasubset.data,
+                        &quot;userid&quot;,
+                        null
+                      )
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;SLA Name&quot;,
+                  field: &quot;name_sla&quot;,
+                  data: index(
+                    local!datasubset.data,
+                    &quot;name_sla&quot;,
+                    null
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Date Completed&quot;,
+                  field: &quot;date_completed&quot;,
+                  data: if(
+                    Isnull(
+                      index(
+                        local!datasubset.data,
+                        &quot;date_completed&quot;,
+                        null
+                      )
+                    ),
+                    {},
+                    fn!datetext(
+                      ToDate(
+                        index(
+                          local!datasubset.data,
+                          &quot;date_completed&quot;,
+                          null
+                        )
+                      ),
+                      &quot;dd/MM/yyyy&quot;
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Deadline&quot;,
+                  field: &quot;deadline&quot;,
+                  data: if(
+                    Isnull(
+                      index(
+                        local!datasubset.data,
+                        &quot;deadline&quot;,
+                        null
+                      )
+                    ),
+                    {},
+                    fn!datetext(
+                      ToDate(
+                        index(
+                          local!datasubset.data,
+                          &quot;deadline&quot;,
+                          null
+                        )
+                      ),
+                      &quot;dd/MM/yyyy&quot;
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;OverTime&quot;,
+                  data: ToDate(
+                    index(
+                      local!datasubset.data,
+                      &quot;date_completed&quot;,
+                      null
+                    )
+                  ) - ToDate(
+                    index(
+                      local!datasubset.data,
+                      &quot;deadline&quot;,
+                      null
+                    )
+                  )
+                )
+              },
+              value: local!pagingInfo
+            )
+          },
+          secondColumnContents: {}
+        )
+      }
+    )
+  )
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

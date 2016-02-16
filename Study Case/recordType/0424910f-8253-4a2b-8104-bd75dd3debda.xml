@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recordTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <recordType name="SCY_note_dash" a:uuid="0424910f-8253-4a2b-8104-bd75dd3debda">
+        <a:pluralName>SCY Note</a:pluralName>
+        <a:description>Captures activities against the case</a:description>
+        <a:urlStub>4wucuA</a:urlStub>
+        <a:source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:DataStoreEntity" a:uuid="861b7ebf-e964-44cc-be44-f55c3e1c51ff@_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625"/>
+        <a:listViewTemplateExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62960&quot;()</a:listViewTemplateExpr>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;Summary&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62958&quot;()</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>summary</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>36b9c9f3-177b-4f44-bace-cdc1f22ac748</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:defaultSortInfo>
+            <field>noteid</field>
+            <ascending>true</ascending>
+        </a:defaultSortInfo>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dc75-ad65-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{noteid:rp!id}</a:contextExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:refId>36b9c9f3-177b-4f44-bace-cdc1f22ac748</a:refId>
+        </a:relatedActionCfg>
+        <a:isSystem>false</a:isSystem>
+        <a:dataSrcExpr></a:dataSrcExpr>
+        <a:facetsListExpr></a:facetsListExpr>
+        <a:defaultFiltersExpr></a:defaultFiltersExpr>
+        <a:security>16383</a:security>
+    </recordType>
+    <roleMap>
+        <role name="record_type_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4403</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_editor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4405</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_auditor">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4403</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</recordTypeHaul>

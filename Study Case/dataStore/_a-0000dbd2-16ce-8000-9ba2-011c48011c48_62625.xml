@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataStoreHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <dataStore>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625</uuid>
+        <name>Case study Youcef</name>
+        <description>for the case study 01/2016</description>
+        <dataSourceKey>jdbc/Appian</dataSourceKey>
+        <adaptingExplicitSqlNames>false</adaptingExplicitSqlNames>
+        <entities>
+            <entity>
+                <uuid>83faf170-74e9-4e1c-974e-85c67a9b1ff3</uuid>
+                <name>patient</name>
+                <type>{urn:com:appian:types}SCY_patient</type>
+            </entity>
+            <entity>
+                <uuid>3153a228-6267-446a-93a5-f546d12a3de6</uuid>
+                <name>case</name>
+                <type>{urn:com:appian:types}SCY_case</type>
+            </entity>
+            <entity>
+                <uuid>f23c466b-ad1e-4644-a806-4026875c4119</uuid>
+                <name>user</name>
+                <type>{urn:com:appian:types}SCY_user</type>
+            </entity>
+            <entity>
+                <uuid>fed397b2-3435-4f36-a85a-b272c778e588</uuid>
+                <name>logtime</name>
+                <type>{urn:com:appian:types}SCY_logtime</type>
+            </entity>
+            <entity>
+                <uuid>861b7ebf-e964-44cc-be44-f55c3e1c51ff</uuid>
+                <name>note</name>
+                <type>{urn:com:appian:types}SCY_note</type>
+            </entity>
+            <entity>
+                <uuid>36e609a9-4c63-4322-a3b9-e1cdd58787c5</uuid>
+                <name>sla</name>
+                <type>{urn:com:appian:types}SCY_sla</type>
+            </entity>
+        </entities>
+    </dataStore>
+    <isPublished>true</isPublished>
+    <roleMap>
+        <role allowForAll="false" inherit="false" name="administrators">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4404</groupUuid>
+            </groups>
+        </role>
+        <role allowForAll="false" inherit="false" name="authors">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4405</groupUuid>
+            </groups>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="readers">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dbd2-16d2-8000-9aee-01075c01075c_4403</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</dataStoreHaul>

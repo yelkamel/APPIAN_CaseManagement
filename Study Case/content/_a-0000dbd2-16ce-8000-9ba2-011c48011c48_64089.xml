@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_NoteOfCase_dash</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64089</uuid>
+        <description></description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex: 1,
+    batchSize: 20,
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field: &quot;logtimeid&quot;,
+      ascending: false
+    )
+  ),
+  with(
+    local!datasubset: queryrecord(
+      #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64152&quot;,
+      #&quot;SYSTEM_SYSRULES_query&quot;(
+        selection: #&quot;SYSTEM_SYSRULES_querySelection&quot;(
+          columns: {
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;logtimeid&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;userid&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;duration&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;date_created&quot;
+            )
+          }
+        ),
+        filter: #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+          field: &quot;caseid&quot;,
+          operator: &quot;=&quot;,
+          value: ri!caseid
+        ),
+        pagingInfo: local!pagingInfo
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+          label: &quot;Logtime of the case&quot;,
+          firstColumnContents: {
+              #&quot;SYSTEM_SYSRULES_gridField&quot;(
+                totalCount: local!datasubset.totalCount,
+                columns: {
+                  #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                    label: &quot;LogTime number&quot;,
+                    field: &quot;logtimeid&quot;,
+                    data: index(
+                      local!datasubset.data,
+                      &quot;logtimeid&quot;,
+                      {}
+                    )
+                  ),
+                  #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                    label: &quot;User&quot;,
+                    field: &quot;userid&quot;,
+                    data: if(local!datasubset.totalcount &gt; 0, apply(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64113&quot;,local!datasubset.data.userid),null),
+                    alignment: &quot;RIGHT&quot;
+                  ),
+                  #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                    label: &quot;Duration&quot;,
+                    field: &quot;duration&quot;,
+                    data: index(
+                      local!datasubset.data,
+                      &quot;duration&quot;,
+                      {}
+                    ),
+                    alignment: &quot;RIGHT&quot;
+                  ),
+                  #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                    label: &quot;Created Date&quot;,
+                    field: &quot;date_created&quot;,
+                    data: index(
+                      local!datasubset.data,
+                      &quot;date_created&quot;,
+                      {}
+                    ),
+                    alignment: &quot;RIGHT&quot;
+                  )
+                },
+                value: local!pagingInfo,
+                saveInto: local!pagingInfo
+              )
+            
+            
+          },
+          secondColumnContents: {}
+        )
+      },
+      secondColumnContents: {
+        /* Add components here for a two-column dashboard */
+        
+      }
+    )
+  )
+)</definition>
+        <namedTypedValue>
+            <name>caseid</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                <a:nameRef>caseid</a:nameRef>
+            </a:ruleInputTestConfigs>
+        </value>
+    </typedValue>
+</contentHaul>

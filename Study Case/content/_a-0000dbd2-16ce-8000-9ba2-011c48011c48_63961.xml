@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_allocatecase_inter</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63961</uuid>
+        <description></description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(
+  local!userIds:#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63963&quot;(),
+  local!gridSelection: #&quot;SYSTEM_SYSRULES_gridSelection&quot;(
+    pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+      startIndex: 1,
+      batchSize:&quot;20&quot;),
+      sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+        field: &quot;userid&quot;,
+        ascending: true
+      )
+    )
+  ,
+  with(
+  local!datasubset: todatasubset(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64007&quot;(),local!gridSelection.pagingInfo),
+  #&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Allocate Manager to the case&quot;,
+  instructions: &quot;Select one case manager&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_integerField&quot;(
+      label: &quot;Case ID&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      value: pv!caseid,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      readonly: true,
+      validations: {}
+    ),
+    #&quot;SYSTEM_SYSRULES_gridField&quot;(
+      label: &quot;Available users&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      totalCount: local!datasubset.totalcount,
+      columns: {
+        #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+          label: &quot;ID&quot;,
+          field: &quot;userid&quot;,
+          data: local!datasubset.data.userid
+          ),
+        #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+          label: &quot;First Name&quot;,
+          field: &quot;firstName&quot;,
+          data: local!datasubset.data.first_name
+          )
+        ,
+        #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+          label: &quot;Last Name&quot;,
+          field: &quot;lastName&quot;,
+          data:local!datasubset.data.last_name
+          )
+        ,
+        #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+          label: &quot;Last Name&quot;,
+          field: &quot;lastName&quot;,
+          data:local!datasubset.data.email
+          )
+
+        
+      },
+      identifiers: index(local!datasubset.data, &quot;userid&quot;, {}),
+      value: local!gridSelection,
+      saveInto: {local!gridSelection,
+      if(
+        count(local!gridSelection.Selected)&gt;1,
+        {},
+        a!save(ri!userselect, index(save!value, &quot;selected&quot;, null))
+        )
+      },
+      selection: true,
+      validations: if(count(local!gridSelection.Selected)&gt;1, &quot;You must only selected one case manager&quot;, null)
+    )
+  },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Submit&quot;,
+        style: &quot;PRIMARY&quot;,
+        saveInto: {}
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  )
+)
+)
+)
+
+
+</definition>
+        <namedTypedValue>
+            <name>userselect</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                <a:nameRef>userselect</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="a:Expression"/>
+                <a:nameRef>cancel</a:nameRef>
+            </a:ruleInputTestConfigs>
+        </value>
+    </typedValue>
+</contentHaul>

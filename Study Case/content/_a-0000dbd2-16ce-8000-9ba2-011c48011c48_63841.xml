@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_logtime_dash</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63841</uuid>
+        <description></description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_linkField&quot;(
+      label: &quot;User&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      links: #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+        label: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63106&quot;(rf!userid).first_name &amp; &quot; &quot; &amp; #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63106&quot;(rf!userid).last_name,
+        recordType: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63669&quot;,
+        identifier: rf!userid,
+        dashboard: &quot;summary&quot;
+      )
+    ),
+
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Duration&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: rf!duration &amp; &quot; hours&quot;,
+      refreshAfter: &quot;UNFOCUS&quot;,
+      readonly: true   
+      ),
+          #&quot;SYSTEM_SYSRULES_dateField&quot;(
+      label: &quot;Date created&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: rf!date_created,
+      saveInto: {},
+      readonly: true,
+      validations: {}
+    )
+  },
+  secondColumnContents: {
+  #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;&quot;,
+      labelPosition: &quot;COLLAPSED&quot;,
+      value: &quot;&quot;,
+      readonly: true
+    )  
+  }
+  )</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

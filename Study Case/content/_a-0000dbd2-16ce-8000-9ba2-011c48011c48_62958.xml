@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_note_dashboard</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62958</uuid>
+        <description></description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+  firstColumnContents: {
+  
+  if (count(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63098&quot;(rf!caseid)) = 0,   
+  #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Case number&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: rf!caseid &amp; &quot; have been deleted&quot;,
+      saveInto: {},
+      refreshAfter: &quot;UNFOCUS&quot;,
+      readonly: true,
+      validations: {}
+    ),    
+  #&quot;SYSTEM_SYSRULES_linkField&quot;(
+      label: &quot;Case number&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      links: #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+        label: rf!caseid,
+        recordType: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63661&quot;,
+        identifier: rf!caseid,
+        dashboard: &quot;summary&quot;)
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Created by&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63106&quot;(rf!userid).username,
+      saveInto:{},
+      refreshAfter: &quot;UNFOCUS&quot;,
+      readonly: true,
+      validations: {}
+    ),
+    #&quot;SYSTEM_SYSRULES_dateField&quot;(
+      label: &quot;Date created&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: rf!date_created,
+      saveInto: {},
+      readonly: true,
+      validations: {}
+    ),
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;Title&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: rf!title_note,
+      saveInto: {},
+      refreshAfter: &quot;UNFOCUS&quot;,
+      readonly: true,
+      validations: {}
+    ),
+    #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+      label: &quot;description&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: rf!description,
+      saveInto: {},
+      refreshAfter: &quot;UNFOCUS&quot;,
+      readonly: true,
+      validations: {}
+    )
+  }
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

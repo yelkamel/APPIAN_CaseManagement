@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_OutcomesVStime</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64704</uuid>
+        <description>Outcomes by case manager versus time spent on a case</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62809</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!selectedCaseManager,
+  local!casePagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex: 1,
+    batchSize: - 1,
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field: &quot;caseid&quot;,
+      ascending: true
+    )
+  ),
+  local!logTimePagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex: 1,
+    batchSize: - 1,
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field: &quot;caseid&quot;,
+      ascending: true
+    )
+  ),
+  with(
+    local!caseDatasubset: #&quot;SYSTEM_SYSRULES_queryEntity&quot;(
+      entity: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63888&quot;,
+      query: #&quot;SYSTEM_SYSRULES_query&quot;(
+        aggregation: #&quot;SYSTEM_SYSRULES_queryAggregation&quot;(
+          aggregationColumns: {
+            #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(
+              field: &quot;outcome&quot;,
+              isGrouping: true
+            ),
+            #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(
+              field: &quot;case_manager&quot;,
+              isGrouping: true
+            ),
+            #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(
+              field: &quot;caseid&quot;,
+              isGrouping: true
+            ),
+            
+          }
+        ),
+        logicalExpression: #&quot;SYSTEM_SYSRULES_queryLogicalExpression&quot;(
+          operator: &quot;AND&quot;,
+          filters: {
+            #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+              field: &quot;case_manager&quot;,
+              operator: &quot;not null&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+              field: &quot;outcome&quot;,
+              operator: &quot;&lt;&gt;&quot;,
+              value: &quot; &quot;
+            ),
+            if(
+              isnull(
+                local!selectedCaseManager
+              ),
+              null,
+              #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+                field: &quot;case_manager&quot;,
+                operator: &quot;=&quot;,
+                value: local!selectedCaseManager
+              )
+            )
+          }
+        ),
+        pagingInfo: local!casePagingInfo
+      )
+    ),
+    local!logTimeDatasubset: #&quot;SYSTEM_SYSRULES_queryEntity&quot;(
+      entity: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64464&quot;,
+      query: #&quot;SYSTEM_SYSRULES_query&quot;(
+        aggregation: #&quot;SYSTEM_SYSRULES_queryAggregation&quot;(
+          aggregationColumns: {
+            #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(
+              field: &quot;caseid&quot;,
+              isGrouping: true
+            ),
+            #&quot;SYSTEM_SYSRULES_queryAggregationColumn&quot;(
+              field: &quot;duration&quot;,
+              aggregationFunction: &quot;SUM&quot;
+            ),
+            
+          }
+        ),
+        pagingInfo: local!logTimePagingInfo
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+          label: &quot;Case Manager&quot;,
+          labelPosition: &quot;ABOVE&quot;,
+          placeholderLabel: &quot;--- Select a Case Manager ---&quot;,
+          choiceLabels: apply(
+            #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64523&quot;,
+            #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64585&quot;().data.case_manager
+          ),
+          choiceValues: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64585&quot;().data.case_manager,
+          value: local!selectedCaseManager,
+          saveInto: {
+            local!selectedCaseManager
+          },
+          validations: {}
+        ),
+        #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+          label: &quot;Outcomes vs Time&quot;,
+          firstColumnContents: {
+            #&quot;SYSTEM_SYSRULES_gridField&quot;(
+              totalCount: local!caseDatasubset.totalCount,
+              columns: {
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;caseid&quot;,
+                  field: &quot;caseid&quot;,
+                  data: index(
+                    local!caseDatasubset.data,
+                    &quot;caseid&quot;,
+                    null
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;outcome&quot;,
+                  field: &quot;outcome&quot;,
+                  data: index(
+                    local!caseDatasubset.data,
+                    &quot;outcome&quot;,
+                    null
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Time Logged&quot;,
+                  data: if(
+                    local!caseDatasubset.totalCount = 0,
+                    {},
+                    #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64707&quot;(
+                      local!caseDatasubset.data.caseid
+                    )
+                  )
+                )
+              },
+              value: local!casePagingInfo,
+              saveInto: local!casePagingInfo
+            )
+          }
+        )
+      }
+    )
+  )
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

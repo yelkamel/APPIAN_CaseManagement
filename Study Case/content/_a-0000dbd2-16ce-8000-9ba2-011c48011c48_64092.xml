@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>SCY_GetNoteId</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64092</uuid>
+        <description></description>
+        <folderUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62809</folderUuid>
+        <dataStoreEntityCompositeUuid>861b7ebf-e964-44cc-be44-f55c3e1c51ff@_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62625</dataStoreEntityCompositeUuid>
+        <params/>
+        <filters/>
+        <orderings/>
+    </queryRule>
+    <roleMap public="false">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

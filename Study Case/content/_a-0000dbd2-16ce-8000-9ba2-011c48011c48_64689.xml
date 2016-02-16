@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_NoteOfCase</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64689</uuid>
+        <description>for see all the note of a case</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=load(
+  local!notePagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex: 1, batchSize: 20, sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(field: &quot;noteid&quot;, ascending: true)),
+    with(
+        local!noteDatasubset: queryrecord(
+          #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63674&quot;,
+          #&quot;SYSTEM_SYSRULES_query&quot;(
+            selection: #&quot;SYSTEM_SYSRULES_querySelection&quot;(
+            columns: {
+             #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;userid&quot;),
+              #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;noteid&quot;),
+              #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;title_note&quot;),
+              #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field: &quot;date_created&quot;),
+            }
+          ),
+           filter: #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+              field: &quot;caseid&quot;,
+              operator: &quot;=&quot;,
+              value: rf!caseid
+            ),
+          pagingInfo:local!notePagingInfo
+          )
+      ),
+#&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+  label: &quot;Note of this case&quot;,
+  firstColumnContents: {},
+  secondColumnContents: {}
+        ),
+    #&quot;SYSTEM_SYSRULES_gridField&quot;(
+            label: &quot;Click on note ID or Username to see some details&quot;,
+            labelPosition: &quot;ABOVE&quot;,
+            totalCount: local!noteDatasubset.totalcount,
+            columns: {
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                label: &quot;Note ID&quot;,
+                field: &quot;noteid&quot;,
+                data: index(local!noteDatasubset.data, &quot;noteid&quot;,null),
+                links: apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(label: {},recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63674&quot;,identifier: _, dashboard: &quot;summary&quot;),
+                index(local!noteDatasubset.data, &quot;noteid&quot;, {}))
+              ),
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                label: &quot;Username&quot;,
+                field: &quot;userid&quot;,
+                data: if(local!noteDatasubset.totalcount &gt; 0, apply(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64113&quot;,local!noteDatasubset.data.userid),null),
+                links: apply(#&quot;SYSTEM_SYSRULES_recordLink&quot;(label: {},recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63669&quot;,identifier: _, dashboard: &quot;summary&quot;),
+                index(local!noteDatasubset.data, &quot;userid&quot;, {}))
+              ),
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                label: &quot;Title&quot;,
+                field: &quot;title_note&quot;,
+                data: index(local!noteDatasubset.data, &quot;title_note&quot;,null)
+              ),
+              #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                label: &quot;Date&quot;,
+                field: &quot;date_created&quot;,
+                data: index(local!noteDatasubset.data, &quot;date_created&quot;,null)
+              )
+            },
+            value: local!notePagingInfo
+          )
+
+  },
+  secondColumnContents: {
+    /* Add components here for a two-column dashboard */
+  }
+)))</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

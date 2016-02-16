@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_updatecase_interface</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63658</uuid>
+        <description></description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>=#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label: &quot;Case number &quot; &amp; pv!currentcase.caseid,
+  instructions: &quot;Case information&quot;,
+  firstColumnContents: {
+    #&quot;SYSTEM_SYSRULES_dateField&quot;(
+      label: &quot;Date created&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      value: pv!currentcase.date_created,
+      readonly: true,
+      validations: {}
+    ),
+    if(isnull(pv!currentcase.date_closed),
+    #&quot;SYSTEM_SYSRULES_pickerFieldUsers&quot;(
+      label: &quot;Manager&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      maxselections: 1,
+      groupfilter: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62982&quot;,
+      value: ri!manager_name,
+      saveInto: ri!manager_name,
+      required: true,
+      requiredmessage: &quot;You must enter who is in charge of the case ?&quot;,
+      validations: {}
+    ),    #&quot;SYSTEM_SYSRULES_linkField&quot;(
+      label: &quot;Case manager&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      links: #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+        label: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63106&quot;(pv!currentcase.case_manager).first_name &amp; &quot; &quot; &amp; #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63106&quot;(pv!currentcase.case_manager).last_name,
+        recordType: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63669&quot;,
+        identifier: pv!currentcase.case_manager,
+        dashboard: &quot;summary&quot;
+      )
+    )
+    ),
+
+/*
+    a!dropdownField(
+      label: &quot;Patient&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      placeholderLabel: &quot;--- Select a Patient ---&quot;,
+      choiceLabels: rule!SCY_GetListPatientName(),
+      choiceValues: rule!SCY_GetListPatientid(),
+      value: ri!patientid,
+      saveInto: ri!patientid,
+      required: true,
+      requiredmessage: &quot;This case is created for which patient ?&quot;,
+      validations: {}
+    ),
+*/
+    #&quot;SYSTEM_SYSRULES_linkField&quot;(
+      label: &quot;Patient&quot;,
+      labelPosition: &quot;ADJACENT&quot;,
+      links: #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+        label:#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63171&quot;(pv!currentcase.patientid).first_name &amp; &quot; &quot; &amp; #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63171&quot;(pv!currentcase.patientid).last_name,
+        recordType: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63672&quot;,
+        identifier: pv!currentcase.patientid,
+        dashboard: &quot;summary&quot;
+      )
+    )
+  /*  a!dropdownField(
+      label: &quot;outcome&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      placeholderLabel: &quot;--- Select a outcome ---&quot;,
+      choiceLabels: cons!SCY_case_outcomes,
+      choiceValues: cons!SCY_case_outcomes,
+      value: ri!outcome,
+      saveInto: ri!outcome,
+          required: true,
+      requiredmessage: &quot;What is the result of the case ?&quot;,
+      validations: {}
+    ),
+    a!dateField(
+      label: &quot;Date closed&quot;,
+      labelPosition: &quot;ABOVE&quot;,
+      value: ri!date_closed,
+      saveInto: ri!date_closed,
+          required: true,
+      validations: {}
+    ) */
+  },
+  secondColumnContents: {
+    #&quot;SYSTEM_SYSRULES_textField&quot;(
+      label: &quot;&quot;,
+      labelPosition: &quot;COLLAPSED&quot;,
+      value: &quot;&quot;,
+      readonly: true
+    ) 
+  },
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+    primaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Delete&quot;,
+         style: &quot;DESTRUCTIVE&quot;,
+        confirmmessage: &quot;Are you sure to delete this&quot;&amp;if(isnull(pv!currentcase.date_closed),&quot; open &quot;,&quot; closed &quot;) &amp; &quot;case ? if you want to keep a resume or something please make a note before&quot;,
+                 value: true,
+        saveInto: ri!delete,
+        skipValidation: true
+      ),
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Save&quot;,
+         style: &quot;PRIMARY&quot;,
+        saveInto: {}
+      )
+    },
+    secondaryButtons: {
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+        label: &quot;Cancel&quot;,
+        style: &quot;NORMAL&quot;,
+        value: true,
+        saveInto: ri!cancel,
+        skipValidation: true
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>case_manager</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>delete</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>manager_name</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                <a:nameRef>case_manager</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="a:Expression"/>
+                <a:nameRef>cancel</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="a:Expression"/>
+                <a:nameRef>delete</a:nameRef>
+            </a:ruleInputTestConfigs>
+            <a:ruleInputTestConfigs>
+                <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                <a:nameRef>manager_name</a:nameRef>
+            </a:ruleInputTestConfigs>
+        </value>
+    </typedValue>
+</contentHaul>

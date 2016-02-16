@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>SCY_SLA_Report</name>
+        <uuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64315</uuid>
+        <description>Displays SLA statuses</description>
+        <parentUuid>_a-0000dbd2-16ce-8000-9ba2-011c48011c48_62739</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= load(
+  local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+    startIndex: 1,
+    batchSize: length(
+      #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64323&quot;(
+        &quot;slaid&quot;
+      )
+    ),
+    sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+      field: &quot;slaid&quot;,
+      ascending: true
+    )
+  ),
+  with(
+    local!datasubset: queryrecord(
+      #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64318&quot;,
+      #&quot;SYSTEM_SYSRULES_query&quot;(
+        selection: #&quot;SYSTEM_SYSRULES_querySelection&quot;(
+          columns: {
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;slaid&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;caseid&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;name_sla&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;date_completed&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;deadline&quot;
+            ),
+            #&quot;SYSTEM_SYSRULES_queryColumn&quot;(
+              field: &quot;userid&quot;
+            )
+          }
+        ),
+        pagingInfo: local!pagingInfo
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+      firstColumnContents: {
+        #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+          label: &quot;SLA Report&quot;,
+          firstColumnContents: {
+            #&quot;SYSTEM_SYSRULES_gridField&quot;(
+              label: &quot; &quot;,
+              labelPosition: &quot;ABOVE&quot;,
+              totalCount: local!datasubset.totalcount,
+              columns: {
+                #&quot;SYSTEM_SYSRULES_gridImageColumn&quot;(
+                  label: &quot;Status&quot;,
+                  data: if(
+                    apply(
+                      isnull(
+                        _
+                      ),
+                      index(
+                        local!datasubset.data,
+                        &quot;date_completed&quot;,
+                        null
+                      )
+                    ),
+                    #&quot;SYSTEM_SYSRULES_documentImage&quot;(
+                      document: #&quot;SYSTEM_SYSRULES_iconIndicator&quot;(
+                        &quot;FACE_INDIFFERENT&quot;
+                      ),
+                      altText: &quot;Incomplete icon&quot;,
+                      caption: &quot;Incomplete&quot;
+                    ),
+                    if(
+                      index(
+                        local!datasubset.data,
+                        &quot;date_completed&quot;,
+                        null
+                      ) &lt; index(
+                        local!datasubset.data,
+                        &quot;deadline&quot;,
+                        null
+                      ),
+                      #&quot;SYSTEM_SYSRULES_documentImage&quot;(
+                        document: #&quot;SYSTEM_SYSRULES_iconIndicator&quot;(
+                          &quot;FACE_HAPPY&quot;
+                        ),
+                        altText: &quot;Complete icon&quot;,
+                        caption: &quot;Complete&quot;
+                      ),
+                      #&quot;SYSTEM_SYSRULES_documentImage&quot;(
+                        document: #&quot;SYSTEM_SYSRULES_iconIndicator&quot;(
+                          &quot;FACE_SAD&quot;
+                        ),
+                        altText: &quot;Late icon&quot;,
+                        caption: &quot;Late&quot;
+                      )
+                    )
+                  ),
+                  size: &quot;ICON&quot;
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Case&quot;,
+                  field: &quot;caseid&quot;,
+                  data: index(
+                    local!datasubset.data,
+                    &quot;caseid&quot;,
+                    null
+                  ),
+                  links: apply(
+                    #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+                      label: {},
+                      recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63661&quot;,
+                      identifier: _,
+                      dashboard: &quot;summary&quot;
+                    ),
+                    index(
+                      local!datasubset.data,
+                      &quot;caseid&quot;,
+                      null
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;SLA&quot;,
+                  field: &quot;slaid&quot;,
+                  data: index(
+                    local!datasubset.data,
+                    &quot;slaid&quot;,
+                    null
+                  ),
+                  links: apply(
+                    #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+                      label: {},
+                      recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64318&quot;,
+                      identifier: _,
+                      dashboard: &quot;summary&quot;
+                    ),
+                    index(
+                      local!datasubset.data,
+                      &quot;slaid&quot;,
+                      null
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;User&quot;,
+                  field: &quot;userid&quot;,
+                  data: apply(#&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_64523&quot;,index(
+                    local!datasubset.data,
+                    &quot;userid&quot;,
+                    null
+                  )),
+                  /*apply(rule!SCY_Getusername_byid, if(isnull(local!datasubset.data.userid), 1, local!datasubset.data.userid)),  */
+                  links: apply(
+                    #&quot;SYSTEM_SYSRULES_recordLink&quot;(
+                      label: {},
+                      recordtype: #&quot;_a-0000dbd2-16ce-8000-9ba2-011c48011c48_63669&quot;,
+                      identifier: _,
+                      dashboard: &quot;summary&quot;
+                    ),
+                    index(
+                      local!datasubset.data,
+                      &quot;userid&quot;,
+                      null
+                    )
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;SLA Name&quot;,
+                  field: &quot;name_sla&quot;,
+                  data: index(
+                    local!datasubset.data,
+                    &quot;name_sla&quot;,
+                    null
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Date Completed&quot;,
+                  field: &quot;date_completed&quot;,
+                  data: fn!datetext(
+                    ToDate(
+                      index(
+                        local!datasubset.data,
+                        &quot;date_completed&quot;,
+                        null
+                      )
+                    ),
+                    &quot;dd/MM/yyyy&quot;
+                  )
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label: &quot;Deadline&quot;,
+                  field: &quot;deadline&quot;,
+                  data: fn!datetext(
+                    ToDate(
+                      index(
+                        local!datasubset.data,
+                        &quot;deadline&quot;,
+                        null
+                      )
+                    ),
+                    &quot;dd/MM/yyyy&quot;
+                  )
+                )
+              },
+              value: local!pagingInfo
+            )
+          },
+          secondColumnContents: {}
+        )
+      }
+    )
+  )
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+    </typedValue>
+</contentHaul>

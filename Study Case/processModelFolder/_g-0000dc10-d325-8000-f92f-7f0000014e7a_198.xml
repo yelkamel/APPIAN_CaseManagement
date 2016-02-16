@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<processModelFolderHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <processModelFolder>
+        <name>SCY_modeler</name>
+        <uuid>_g-0000dc10-d325-8000-f92f-7f0000014e7a_198</uuid>
+        <description></description>
+    </processModelFolder>
+    <roleMap>
+        <role name="ADMIN_OWNER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="EDITOR">
+            <users/>
+            <groups/>
+        </role>
+        <role name="EXPLICIT_NONMEMBER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="VIEWER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="MANAGER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="INITIATOR">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</processModelFolderHaul>
